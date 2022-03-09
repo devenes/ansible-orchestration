@@ -13,14 +13,14 @@ variable "instance_type" {
 }
 
 data "aws_ami" "ubuntu" {
-  most_recent = true # Find the most recent AMI
-
-  owners = ["099720109477"] # Find the AMI with the correct owner
+  most_recent = true             # Find the most recent AMI
+  owners      = ["099720109477"] # Find the AMI with the correct owner
 
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"] # Find the AMI with the correct name
   }
+
   filter {
     name   = "virtualization-type"
     values = ["hvm"] # Find the AMI with the correct virtualization type
@@ -46,7 +46,6 @@ resource "aws_security_group" "application_server_sg" { # Create a security grou
     cidr_blocks      = ["0.0.0.0/0"] # Allow all traffic
     ipv6_cidr_blocks = ["::/0"]      # Allow all IPv6 traffic
   }
-
 }
 resource "aws_instance" "application_servers" {
 
