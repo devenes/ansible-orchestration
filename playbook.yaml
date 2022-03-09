@@ -1,0 +1,19 @@
+- name: Copy files to remote host
+  hosts: application_servers
+  user: ubuntu
+  become: yes
+  tasks: 
+    - name: apt update      
+      command: apt update -y 
+    - name: install nginx
+      apt:
+        name: nginx
+        state: latest
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+    - name: Copy script to remote host
+      template: src={{ script_filename }} dest=/tmp/script.sh mode=755
+    - name: Run script on remote host
+      command: sh /tmp/script.sh

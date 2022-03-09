@@ -1,0 +1,1 @@
+echo "Ahmed Enes Turan 2022" > /var/www/html/index.nginx-debian.html
