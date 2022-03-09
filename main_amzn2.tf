@@ -12,18 +12,20 @@ variable "instance_type" {
   default = "t2.micro" # Define your instance type
 }
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "amazon-linux-2" {
   most_recent = true # Find the most recent AMI
+
+  owners = ["amazon"] # Find the AMI with the correct owner
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"] # Find the AMI with the correct name
+    values = ["amzn2-ami-hvm*"] # Find the AMI with the correct name
   }
+
   filter {
-    name   = "virtualization-type" # Find the AMI with the correct virtualization type
-    values = ["hvm"]
+    name   = "owner-alias"
+    values = ["amazon"] # Find the AMI with the correct owner alias
   }
-  owners = ["099720109477"] # Find the AMI with the correct owner
 }
 
 resource "aws_security_group" "application_server_sg" { # Create a security group
@@ -39,25 +41,26 @@ resource "aws_security_group" "application_server_sg" { # Create a security grou
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
+    from_port        = 0             # Define the port number for the egress rule
+    to_port          = 0             # Define the port number for the egress rule
+    protocol         = "-1"          # Create the security group rule with all ports open for egress
     cidr_blocks      = ["0.0.0.0/0"] # Allow all traffic
     ipv6_cidr_blocks = ["::/0"]      # Allow all IPv6 traffic
   }
 
 }
+
 resource "aws_instance" "application_servers" {
 
   count                  = 2                                             # Define the number of instances you want to create
-  ami                    = data.aws_ami.ubuntu.id                        # Define the AMI ID
+  ami                    = data.aws_ami.amazon-linux-2.id                # Define the AMI ID
   instance_type          = var.instance_type                             # Define the instance type
   key_name               = "ssh1"                                        # Define your existing key pair name
   vpc_security_group_ids = [aws_security_group.application_server_sg.id] # Define the security group ID
   depends_on             = [aws_security_group.application_server_sg]    # Wait for the security group to be created before creating the instance
 
   tags = {
-    Name = "AppServer-${count.index + 1}"
+    Name = "AppServer-${count.index + 1}" # Define the name of the instance
   }
 }
 
