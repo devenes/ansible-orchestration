@@ -13,9 +13,8 @@ variable "instance_type" {
 }
 
 data "aws_ami" "amazon-linux-2" {
-  most_recent = true # Find the most recent AMI
-
-  owners = ["amazon"] # Find the AMI with the correct owner
+  most_recent = true       # Find the most recent AMI
+  owners      = ["amazon"] # Find the AMI with the correct owner
 
   filter {
     name   = "name"
@@ -47,7 +46,6 @@ resource "aws_security_group" "application_server_sg" { # Create a security grou
     cidr_blocks      = ["0.0.0.0/0"] # Allow all traffic
     ipv6_cidr_blocks = ["::/0"]      # Allow all IPv6 traffic
   }
-
 }
 
 resource "aws_instance" "application_servers" {
