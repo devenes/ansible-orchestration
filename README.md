@@ -2,7 +2,7 @@
 
 Files include lecture notes and application files kept in the cloud academy.
 
-## What is Ansible?
+# What is Ansible?
 
 Ansible is a software tool that provides simple but powerful automation for cross-platform computer support. It is primarily intended for IT professionals, who use it for application deployment, updates on workstations and servers, cloud provisioning, configuration management, intra-service orchestration, and nearly anything a systems administrator does on a weekly or daily basis. Ansible doesn't depend on agent software and has no additional security infrastructure, so it's easy to deploy.
 
@@ -13,7 +13,7 @@ While Ansible may be at the forefront of automation, systems administration, and
 Check out the [Ansible Article](https://opensource.com/resources/what-ansible) for more information.
 
 
-## Infrastructure as Code with Terraform
+# Infrastructure as Code with Terraform
 
 Infrastructure as code (IaC) tools allow you to manage infrastructure with configuration files rather than through a graphical user interface. IaC allows you to build, change, and manage your infrastructure in a safe, consistent, and repeatable way by defining resource configurations that you can version, reuse, and share.
 
@@ -33,4 +33,4 @@ Terraform is HashiCorp's infrastructure as code tool. It lets you define resourc
 
 - You can commit your configurations to version control to safely collaborate on infrastructure.
 
-Check out the [Terraform Article](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code) for more information.
+Check out the [Terraform Documentation](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code) for more information.
